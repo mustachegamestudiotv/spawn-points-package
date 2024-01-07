@@ -7,6 +7,9 @@ namespace Com.MustacheGameStudioTV.SpawnPoints {
     [System.Serializable]
     public class ControladorInimigo {
 
+        public delegate void OndasInimigosConcluidasDelegate();
+        public OndasInimigosConcluidasDelegate OndasInimigosConcluidas; 
+
         [SerializeField]
         private OndaInimigo[] ondasInimigo;
 
@@ -41,6 +44,10 @@ namespace Com.MustacheGameStudioTV.SpawnPoints {
                 this.ondaInimigoAtual.Iniciar();
             } else {
                 this.ondaInimigoAtual = null;
+
+                if (this.OndasInimigosConcluidas != null) {
+                    this.OndasInimigosConcluidas.Invoke();
+                }
             }
         }
 
